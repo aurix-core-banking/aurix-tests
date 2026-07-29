@@ -1,0 +1,45 @@
+# Test artifacts
+allure-results/
+allure-report/
+test-results/
+playwright-report/
+test-artifacts/
+
+# Reports
+reports/
+coverage/
+*.xml
+*.html
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (Playwright, k6)
+node_modules/
+dist/
+
+# Python (pytest)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.eggs/
+
+# Logs
+*.log
+
+# Screenshots / videos
+screenshots/
+videos/
+
+# Env
+.env
+.env.local
+
+# Temp
+tmp/
+temp/
