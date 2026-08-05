@@ -1,0 +1,63 @@
+name: Performance Tests (k6)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'performance/**'
+  pull_request:
+    paths:
+      - 'performance/**'
+  schedule:
+    - cron: '0 2 * * 1-5' # dias úteis às 02:00 UTC
+
+env:
+  AURIX_BASE_URL: http://localhost:8080
+
+jobs:
+  k6-smoke:
+    name: Smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Smoke test
+        working-directory: performance
+        run: k6 run --quiet smoke-test.js
+
+  k6-load:
+    name: Load test (p95<500ms, p99<1s)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Load test
+        working-directory: performance
+        run: k6 run load-test.js
+
+  k6-stress:
+    name: Stress test
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Stress test
+        working-directory: performance
+        run: k6 run stress-test.js
