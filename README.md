@@ -18,6 +18,22 @@ Cross-service test suites that validate the interactions between all Aurix compo
 - REST Assured (API tests)
 - k6 (performance)
 
+## Performance
+
+```bash
+# Teste de fumaça
+k6 run performance/smoke-test.js
+
+# Teste de carga (thresholds p95 < 500ms, p99 < 1s)
+k6 run performance/load-test.js
+
+# Teste de estresse
+k6 run performance/stress-test.js
+```
+
+Veja [performance/README.md](performance/README.md) para detalhes de cenários,
+variáveis de ambiente e execução de scripts isolados.
+
 ## Related
 
 - [aurix-backend](https://github.com/aureus-platform/aurix-backend)
