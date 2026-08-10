@@ -8,12 +8,13 @@ DOCKER_COMPOSE_FILE = os.path.join(INFRASTRUCTURE_DIR, "docker-compose.yml")
 DEFAULT_TIMEOUT_SECONDS = int(os.getenv("AUREUS_E2E_TIMEOUT", "300"))
 
 SERVICE_HEALTH_ENDPOINTS = {
-    # --- 13 Consolidated Services ---
+    # --- 14 serviços consolidados ---
     "svc-banking":     "http://localhost:8200/actuator/health",
     "svc-payments":    "http://localhost:8201/actuator/health",
     "svc-credit":      "http://localhost:8082/actuator/health",
     "svc-customer":    "http://localhost:8083/actuator/health",
     "svc-products":    "http://localhost:8084/actuator/health",
+    "svc-contracts":   "http://localhost:8085/actuator/health",
     "svc-finance-mgmt":"http://localhost:8089/actuator/health",
     "svc-intelligence":"http://localhost:8091/actuator/health",
     "svc-platform":    "http://localhost:8092/actuator/health",
