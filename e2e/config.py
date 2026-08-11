@@ -22,7 +22,7 @@ SERVICE_HEALTH_ENDPOINTS = {
     "svc-cards":       "http://localhost:8094/actuator/health",
     "svc-compliance":  "http://localhost:8205/actuator/health",
     "svc-fraud":       "http://localhost:8207/actuator/health",
-    "svc-ai":          "http://localhost:8206/actuator/health",
+    "svc-ai":          "http://localhost:8206/api/ai/actuator/health",
 }
 
 GATEWAY_URL = "http://localhost:8080"
