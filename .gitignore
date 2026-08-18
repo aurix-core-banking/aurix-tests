@@ -8,8 +8,6 @@ test-artifacts/
 # Reports
 reports/
 coverage/
-*.xml
-*.html
 
 # IDE
 .idea/
@@ -28,6 +26,13 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .eggs/
+venv/
+.venv/
+
+# Java (REST Assured / Maven)
+target/
+*.class
+*.jar
 
 # Logs
 *.log
