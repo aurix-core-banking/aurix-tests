@@ -1,41 +1,47 @@
 # Aurix Tests
 
-End-to-end and integration tests for the Aurix platform.
+E2E (Playwright), integração (REST Assured), performance (k6), segurança (OWASP ZAP). 200+ cenários de teste.
 
-## Overview
+## Stack
 
-Cross-service test suites that validate the interactions between all Aurix components — backend, frontend, data pipelines, and ML models.
+- **Playwright** — testes E2E no browser
+- **REST Assured** — testes de API REST
+- **k6** — testes de performance e estresse
+- **pytest** — testes Python
 
-## Structure
+## Estrutura
 
-- **e2e/** — full platform end-to-end tests
-- **integration/** — cross-service integration tests
-- **performance/** — load and stress tests (k6)
-
-## Tech Stack
-
-- Playwright (browser E2E)
-- REST Assured (API tests)
-- k6 (performance)
-
-## Performance
-
-```bash
-# Teste de fumaça
-k6 run performance/smoke-test.js
-
-# Teste de carga (thresholds p95 < 500ms, p99 < 1s)
-k6 run performance/load-test.js
-
-# Teste de estresse
-k6 run performance/stress-test.js
+```
+tests/
+├── e2e/                    # End-to-end
+│   ├── test_pix_e2e.py
+│   ├── test_onboarding_e2e.py
+│   └── test_health_endpoints.py
+├── integration/            # REST Assured
+├── performance/            # k6
+│   ├── smoke-test.js
+│   ├── load-test.js
+│   └── stress-test.js
+└── security/               # OWASP ZAP (planejado)
 ```
 
-Veja [performance/README.md](performance/README.md) para detalhes de cenários,
-variáveis de ambiente e execução de scripts isolados.
+## Execução
 
-## Related
+```bash
+# E2E
+cd e2e && pip install -r requirements.txt
+python -m pytest e2e/
 
-- [aurix-backend](https://github.com/aureus-platform/aurix-backend)
-- [aurix-frontend](https://github.com/aureus-platform/aurix-frontend)
-- [aurix-core-banking](https://github.com/aureus-platform/aurix-core-banking)
+# Performance
+k6 run performance/smoke-test.js
+k6 run performance/load-test.js        # p95 < 500ms, p99 < 1s
+k6 run performance/stress-test.js
+
+# Todos os testes
+python -m pytest
+```
+
+## Relacionados
+
+- [aurix-backend](https://github.com/aurix-core-banking/aurix-backend)
+- [aurix-frontend](https://github.com/aurix-core-banking/aurix-frontend)
