@@ -1,0 +1,378 @@
+# =============================================================================
+# OWASP ZAP Configuration - Aurix Platform
+# Configuração de scan policy, alert thresholds e regras
+# =============================================================================
+
+# Configurações gerais do ZAP
+environment:
+  name: Aurix Platform - Testes de Segurança
+  zapVersion: "2.15.0"
+  defaultThreshold: Medium
+
+# Configurações de scan policy
+scanPolicy:
+  name: Aurix Security Policy
+  defaultStrength: Medium
+  defaultThreshold: Medium
+  rules:
+    # Regras habilitadas com threshold
+    - id: 10021  # XSS (Cross-Site Scripting)
+      strength: Medium
+      threshold: Medium
+      enabled: true
+
+    - id: 10020  # SQL Injection
+      strength: High
+      threshold: Medium
+      enabled: true
+
+    - id: 10024  # SQL Injection (MySQL)
+      strength: High
+      threshold: Medium
+      enabled: true
+
+    - id: 10025  # SQL Injection (Hypersonic)
+      strength: High
+      threshold: Medium
+      enabled: true
+
+    - id: 10026  # SQL Injection (SQLite)
+      strength: High
+      threshold: Medium
+      enabled: true
+
+    - id: 40018  # SQL Injection (PostgreSQL)
+      strength: High
+      threshold: Medium
+      enabled: true
+
+    - id: 10019  # Content-Type Header Missing
+      strength: Medium
+      threshold: Medium
+      enabled: true
+
+    - id: 10017  # Cross-Domain JavaScript Source
+      strength: Medium
+      threshold: Low
+      enabled: true
+
+    - id: 10015  # Re-examine Cache-control
+      strength: Medium
+      threshold: Low
+      enabled: true
+
+    - id: 10011  # Server Leaks Version
+      strength: Low
+      threshold: Medium
+      enabled: true
+
+    - id: 10012  # Server Leaks via X-Powered-By
+      strength: Low
+      threshold: Medium
+      enabled: true
+
+    - id: 10013  # Server Leaks via Open-Ended Redirect
+      strength: Medium
+      threshold: Low
+      enabled: true
+
+    - id: 10014  # Information Disclosure - Sensitive
+      strength: Medium
+      threshold: Medium
+      enabled: true
+
+    - id: 10016  # Web Browser XSS Protection
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10018  # X-Frame-Options Missing
+      strength: Low
+      threshold: Medium
+      enabled: true
+
+    - id: 10023  # Information Disclosure - Debug Errors
+      strength: Medium
+      threshold: Medium
+      enabled: true
+
+    - id: 10027  # Information Disclosure - Sensitive Information in URL
+      strength: Medium
+      threshold: Medium
+      enabled: true
+
+    - id: 10028  # Information Disclosure - Sensitive Information in HTTP Referrer
+      strength: Low
+      threshold: Medium
+      enabled: true
+
+    - id: 10029  # Information Disclosure - Base64 Data
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10030  # Information Disclosure - Check for
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10031  # Information Disclosure - Potential
+      strength: Medium
+      threshold: Low
+      enabled: true
+
+    - id: 10032  # Information Disclosure - Internal
+      strength: Medium
+      threshold: Medium
+      enabled: true
+
+    - id: 10033  # Information Disclosure -漏洩
+      strength: Medium
+      threshold: Medium
+      enabled: true
+
+    - id: 10034  # Information Disclosure - Possible
+      strength: Medium
+      threshold: Low
+      enabled: true
+
+    - id: 10035  # Information Disclosure - Source
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10036  # Information Disclosure - Server
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10037  # Information Disclosure - Power
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10038  # Information Disclosure - Content
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10039  # Information Disclosure - X-Powered
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10040  # Information Disclosure - Request
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10041  # Information Disclosure - Response
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10042  # Information Disclosure - User
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10043  # Information Disclosure - Password
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10044  # Information Disclosure - Session
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10045  # Information Disclosure - X-Forwarded
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10046  # Information Disclosure - Via
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10047  # Information Disclosure - Server
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10048  # Information Disclosure - X-AspNet
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10049  # Information Disclosure - X-AspNetMvc
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10050  # Information Disclosure - X-AspNet-Version
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10051  # Information Disclosure - X-AspNetMvc-Version
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10052  # Information Disclosure - X-Debug
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10053  # Information Disclosure - X-Generator
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10054  # Information Disclosure - X-Powered-By
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10055  # Information Disclosure - X-Runtime
+      strength: Low
+      threshold: Low
+      enabled: true
+
+    - id: 10056  # Information Disclosure - X-Version
+      strength: Low
+      threshold: Low
+      enabled: true
+
+# Configurações de spider
+spider:
+  maxDepth: 10
+  maxChildren: 0
+  recurseDepth: 0
+  threadCount: 10
+  maxDuration: 0
+  maxParseSizeBytes: 0
+  handleCookies: true
+  handleODataParams: false
+  parseComments: false
+  parseGit: false
+  parseSitemap: true
+  parseRobotsTxt: true
+  parseSVNEntries: false
+  parseHg: false
+  parseDSStore: false
+  parseWWW-Authenticate: false
+
+# Configurações de AJAX Spider
+ajaxSpider:
+  enabled: false
+  maxDuration: 0
+  maxCrawlDepth: 0
+  maxStateErrors: 5
+  maxDOMEvents: 50
+  maxScrollEvents: 50
+
+# Configurações de active scan
+activeScan:
+  maxRuleDurationInMins: 0
+  maxScanDurationInMins: 0
+  maxThreadsPerHost: 2
+  delayInMs: 0
+  handleAntiCsrfTokens: true
+  injectPluginIdInHeader: false
+  scanNullNames: false
+  removeUpgradedHSTSHeader: false
+
+# Configurações de relatório
+report:
+  format: HTML
+  template: Traditional HTML Report
+  outputDir: ./reports
+
+# Configurações de alertas (thresholds)
+alertThresholds:
+  high:
+    - 40018  # SQL Injection (PostgreSQL)
+    - 10020  # SQL Injection
+    - 10021  # XSS (Cross-Site Scripting)
+    - 40012  # Cross-Site Request Forgery
+    - 40014  # Absence of Anti-CSRF Tokens
+
+  medium:
+    - 10019  # Content-Type Header Missing
+    - 10023  # Information Disclosure - Debug Errors
+    - 10027  # Information Disclosure - Sensitive Information in URL
+    - 10028  # Information Disclosure - Sensitive Information in HTTP Referrer
+    - 10031  # Information Disclosure - Potential
+    - 10032  # Information Disclosure - Internal
+    - 10033  # Information Disclosure - Possible
+
+  low:
+    - 10011  # Server Leaks Version
+    - 10012  # Server Leaks via X-Powered-By
+    - 10013  # Server Leaks via Open-Ended Redirect
+    - 10015  # Re-examine Cache-control
+    - 10016  # Web Browser XSS Protection
+    - 10017  # Cross-Domain JavaScript Source
+    - 10018  # X-Frame-Options Missing
+    - 10029  # Information Disclosure - Base64 Data
+    - 10030  # Information Disclosure - Check for
+    - 10034  # Information Disclosure - Possible
+    - 10035  # Information Disclosure - Source
+    - 10036  # Information Disclosure - Server
+    - 10037  # Information Disclosure - Power
+    - 10038  # Information Disclosure - Content
+    - 10039  # Information Disclosure - X-Powered
+    - 10040  # Information Disclosure - Request
+    - 10041  # Information Disclosure - Response
+    - 10042  # Information Disclosure - User
+    - 10043  # Information Disclosure - Password
+    - 10044  # Information Disclosure - Session
+    - 10045  # Information Disclosure - X-Forwarded
+    - 10046  # Information Disclosure - Via
+    - 10047  # Information Disclosure - Server
+    - 10048  # Information Disclosure - X-AspNet
+    - 10049  # Information Disclosure - X-AspNetMvc
+    - 10050  # Information Disclosure - X-AspNet-Version
+    - 10051  # Information Disclosure - X-AspNetMvc-Version
+    - 10052  # Information Disclosure - X-Debug
+    - 10053  # Information Disclosure - X-Generator
+    - 10054  # Information Disclosure - X-Powered-By
+    - 10055  # Information Disclosure - X-Runtime
+    - 10056  # Information Disclosure - X-Version
+
+# Contexto de scan
+context:
+  name: Aurix Platform
+  description: Plataforma Aurix - Testes de Segurança
+  includePaths:
+    - ".*aurix.*"
+    - ".*api/v1.*"
+    - ".*banking.*"
+    - ".*customer.*"
+    - ".*credit.*"
+    - ".*payments.*"
+    - ".*platform.*"
+  excludePaths:
+    - ".*actuator.*"
+    - ".*health.*"
+    - ".*metrics.*"
+    - ".*info.*"
+    - ".*swagger.*"
+    - ".*docs.*"
+    - ".*static.*"
+    - ".*assets.*"
+    - ".*images.*"
+    - ".*fonts.*"
+    - ".*css.*"
+    - ".*js.*"
+    - ".*favicon.*"
+
+# Usuários para autenticação
+users:
+  - name: admin-test
+    username: admin@aurix.com
+    password: test-password-123
+    forcedUserID: true
