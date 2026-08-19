@@ -1,0 +1,103 @@
+# ═══════════════════════════════════════════════════════════
+# Pact Contract Testing — Aurix Core Banking Platform
+# Configuração do Pact Broker e pares consumer/provider
+# ═══════════════════════════════════════════════════════════
+
+pact:
+  broker:
+    url: http://localhost:9292
+    username: pact
+    password: pact
+
+  # Publicação de pacts dos consumers
+  publish:
+    consumer_version: ${PACT_CONSUMER_VERSION:-1.0.0-SNAPSHOT}
+    tags:
+      - main
+      - ${GIT_BRANCH:-develop}
+
+  # Verificação de providers
+  verification:
+    provider_base_url: http://localhost:${SERVER_PORT:8080}
+    provider_app_start_timeout: 30
+    provider_app_start_interval: 2
+
+# ═══════════════════════════════════════════════════════════
+# Pares Consumer → Provider
+# ═══════════════════════════════════════════════════════════
+
+pares:
+
+  - consumer: svc-customer
+    provider: svc-banking
+    descricao: "Consulta de contas do cliente via banking"
+    porta_provider: 8200
+    acoes:
+      - consumer_publica_pact
+      - provider_verifica
+
+  - consumer: svc-payments
+    provider: svc-banking
+    descricao: "Débito de conta para pagamentos PIX/TED/DOC"
+    porta_provider: 8200
+    acoes:
+      - consumer_publica_pact
+      - provider_verifica
+
+  - consumer: svc-credit
+    provider: svc-banking
+    descricao: "Consulta de extrato para análise de crédito"
+    porta_provider: 8200
+    acoes:
+      - consumer_publica_pact
+      - provider_verifica
+
+  - consumer: svc-fraud
+    provider: svc-payments
+    descricao: "Bloqueio de transações suspeitas"
+    porta_provider: 8201
+    acoes:
+      - consumer_publica_pact
+      - provider_verifica
+
+# ═══════════════════════════════════════════════════════════
+# Estados de teste (provider states)
+# ═══════════════════════════════════════════════════════════
+
+estados_teste:
+  svc-banking:
+    - "conta 52998224725 existe e está ativa"
+    - "conta conta-001 existe com saldo de R$ 5000,00"
+    - "conta conta-001 tem transações nos últimos 90 dias"
+    - "conta conta-002 existe com saldo de R$ 1200,00"
+
+  svc-payments:
+    - "transação txn-uuid-001 existe e pode ser bloqueada"
+    - "pagamentos API disponível"
+
+# ═══════════════════════════════════════════════════════════
+# Webhooks (notificações de verificação)
+# ═══════════════════════════════════════════════════════════
+
+webhooks:
+  provider_verification_failed:
+    url: http://localhost:8092/api/v1/webhooks/pact-failure
+    method: POST
+    headers:
+      Content-Type: application/json
+      X-Webhook-Source: pact-broker
+    body:
+      event_type: provider_verification_failed
+      provider_name: ${provider_name}
+      consumer_name: ${consumer_name}
+      pact_url: ${pact_url}
+
+  contract_content_changed:
+    url: http://localhost:8092/api/v1/webhooks/pact-changed
+    method: POST
+    headers:
+      Content-Type: application/json
+    body:
+      event_type: contract_content_changed
+      consumer_name: ${consumer_name}
+      provider_name: ${provider_name}
